@@ -1,12 +1,18 @@
-import { connect } from "framer-api"
+import { createRequire } from "module"
 import { writeFileSync } from "fs"
+
+const require = createRequire(import.meta.url)
+const { WebSocket } = require("ws")
+globalThis.WebSocket = WebSocket
+
+const { connect } = await import("framer-api")
 
 const PROJECT_URL = "https://framer.com/projects/Radar-Producci-n-Oficial--8sVNaZ05pi3UfzrQW6xz-8nLzy"
 const DOMAIN = "https://www.somosradar.com"
 const TODAY = new Date().toISOString().split("T")[0]
 
 const STATIC_PAGES = [
-  { path: "/",            priority: "1.0", changefreq: "weekly" },
+  { path: "/",             priority: "1.0", changefreq: "weekly" },
   { path: "/conciliacion", priority: "0.8", changefreq: "monthly" },
   { path: "/payouts",      priority: "0.8", changefreq: "monthly" },
   { path: "/aida",         priority: "0.8", changefreq: "monthly" },
